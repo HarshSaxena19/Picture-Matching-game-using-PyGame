@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pygame
 import game_config as gc
 from pygame import display, event, image
@@ -26,7 +27,7 @@ while running:
     for e in current_events:
         if e.type == pygame.QUIT:
             running=False
-        
+
         if e.type==pygame.KEYDOWN:
             if e.key==pygame.K_ESCAPE:
                 running=False
@@ -38,13 +39,13 @@ while running:
                 current_images.append(index)
             if len(current_images)>2:
                 current_images=current_images[1:]
-            
+
     screen.fill((255,255,255))
     total_skipped=0
 
     for _ , tile in enumerate(tiles):
-        image_i=tile.image if tile.index in current_images else tile.box 
-        if not tile.skip: 
+        image_i=tile.image if tile.index in current_images else tile.box
+        if not tile.skip:
             screen.blit(image_i, (tile.col*gc.IMAGE_SIZE +gc.MARGIN ,tile.row*gc.IMAGE_SIZE + gc.MARGIN))
         else:
             total_skipped+=1
@@ -62,5 +63,5 @@ while running:
             current_images=[]
     if total_skipped==len(tiles):
         running=False
-    
+
 print("GOODBYE GAMER.!")
